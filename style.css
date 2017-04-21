@@ -1,0 +1,17 @@
+#cat-box {
+    padding: 16px;
+    float: left;
+}
+.click-text {
+    font-size: 20px;
+}
+.cat-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+.cat-photo {
+    height: 200px;
+}
+.cat-div {
+    display: none;
+}
