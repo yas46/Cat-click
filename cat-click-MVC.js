@@ -13,7 +13,7 @@ var octopus = {
 }
 
 var model = {
-
+    var catList = [];
 }
 
 });
