@@ -1,3 +1,5 @@
+//Cat menu added to the functionality.
+
 var catList = [];
 
 var catFactory = function(name, url) {
