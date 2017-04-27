@@ -26,26 +26,28 @@ var catFactory = function(name, url) {
         ul.appendChild(li);
 
         //create individual cat div with name, image and click click-count
-        var div = document.createElement('div');
-        div.id = name;
-        div.className = 'cat-div';
+        var catDiv = document.createElement('div');
+        catDiv.id = name;
         var span = document.createElement('span');
-        span.className = 'cat-name';
+        span.id = 'cat-name';
         var image = document.createElement('img');
         image.src = 'https://' + url + '.jpg';
-        image.className = 'cat-photo';
+        image.id = 'cat-photo';
         var clickText = document.createElement('span');
-        clickText.className = 'click-text';
+        clickText.id = 'clicks-text';
         var lineBreak = document.createElement('br');
 
-        document.getElementById('cat-box').appendChild(div);
-        div.appendChild(span);
-        div.appendChild(clickText);
-        div.appendChild(lineBreak);
-        div.appendChild(image);
+        document.getElementById('cat-box2').appendChild(catDiv);
+        catDiv.appendChild(span);
+        catDiv.appendChild(clickText);
+        catDiv.appendChild(lineBreak);
+        catDiv.appendChild(image);
 
         span.innerHTML = name;
         clickText.innerHTML = " clicks: " + clickCount;
+
+        document.getElementById('cat-box').style.display = 'none';
+        catDiv.style.display = 'none';
 
         image.addEventListener('click', function() {
             clickCount++;
