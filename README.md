@@ -5,4 +5,4 @@ Cat-click is a Udacity JavaScript Design Pattern course project. The diffrent JS
 2. cat-click-OO.js
 3. cat-click-MVC.js
 
-The diffrence is in the design of writing code. The JS files evolve from spagetti to OO to full-on MVC.
+The diffrence is in the design of writing code. The JS files design pattern evolve from spagetti to OO to full-on MVC.
