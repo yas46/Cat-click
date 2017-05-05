@@ -2,7 +2,7 @@ $(function(){
 
     var model = {
         currentCat: null,
-        catList: [
+        cats: [
             {
                 clickCount: 0,
                 name: "Tom",
@@ -33,39 +33,30 @@ $(function(){
 
 
     var controller = {
+        init: function(){
+            var currentCat = model.cats[0];
 
-    };
-
-
-    var catView = {
-        init: function(name, url) {
-            var div = document.createElement('div');
-            var span = document.createElement('span');
-            var image = document.createElement('img');
-            var clickText = document.createElement('span');
-            var lineBreak = document.createElement('br');
-            div.id = name;
-            div.className = 'cat-div';
-            span.className = 'cat-name';
-            image.src = 'https://' + url + '.jpg';
-            image.className = 'cat-photo';
-            clickText.className = 'click-text';
-            catView.render(name, url)
+            listView.init();
+            catView.init();
         },
-        render: function(name, url) {
-            document.getElementById('cat-box').appendChild(div);
-            div.appendChild(span);
-            div.appendChild(clickText);
-            div.appendChild(lineBreak);
-            div.appendChild(image);
-            span.innerHTML = name;
-            clickText.innerHTML = " clicks: " + clickCount;
-            image.addEventListener('click', function() {
-                clickCount++;
-                clickText.innerHTML = " clicks: " + clickCount;
-                console.log(clickCount);
-            });
+
+        getCurrentCat: function() {
+            return model.currentCat;
+        },
+
+        setCurrentCat: function(){
+            currentCat = cat;
+        },
+
+        getCats: function(){
+            return model.cats;
+        },
+
+        incrementClickCount: function(){
+            model.currentCat.clickCount++;
+            catView.render;
         }
+
 
     };
 
@@ -86,6 +77,30 @@ $(function(){
             ul.appendChild(li);
         }
     };
+
+    var catView = {
+        init: function() {
+            this.cat = document.getElementById('cat-box');
+            this.catName = document.getElementById('cat-name');
+            this.clickCount  = document.getElementById('click-count');
+            this.catPhoto = document.getElementById('cat-photo');
+
+            this.catPhoto.addEventListener('click', function(e) {
+                controller.incrementClickCount();
+            });
+
+            this.render();
+        },
+        render: function() {
+            var currentCat = controller.getCurrentCat;
+            this.catName.textContent = currentCat.name;
+            this.clickCount.textContent = currentCat.clickCount;
+            this.catPhoto.src = 'https://' + currentCat.url + '.jpg';
+        }
+
+    };
+
+
 
 
 });
