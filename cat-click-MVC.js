@@ -1,5 +1,3 @@
-$(function(){
-
     var model = {
         currentCat: null,
         cats: [
@@ -34,7 +32,7 @@ $(function(){
 
     var controller = {
         init: function(){
-            var currentCat = model.cats[0];
+            model.currentCat = model.cats[0];
 
             listView.init();
             catView.init();
@@ -44,8 +42,8 @@ $(function(){
             return model.currentCat;
         },
 
-        setCurrentCat: function(){
-            currentCat = cat;
+        setCurrentCat: function(cat){
+            model.currentCat = cat;
         },
 
         getCats: function(){
@@ -54,28 +52,10 @@ $(function(){
 
         incrementClickCount: function(){
             model.currentCat.clickCount++;
-            catView.render;
+            catView.render();
         }
 
 
-    };
-
-    var listView = {
-        init: function(name) {
-            var ul = document.getElementById('cat-list');
-            var li = document.createElement("li");
-            listView.render(name)
-        },
-        render: function(name) {
-            li.appendChild(document.createTextNode(name));
-            li.addEventListener('click', (function() {
-                return function() {
-                    hideCat();
-                    document.getElementById(name).style.display = 'block';
-                }
-            })());
-            ul.appendChild(li);
-        }
     };
 
     var catView = {
@@ -92,7 +72,7 @@ $(function(){
             this.render();
         },
         render: function() {
-            var currentCat = controller.getCurrentCat;
+            var currentCat = controller.getCurrentCat();
             this.catName.textContent = currentCat.name;
             this.clickCount.textContent = currentCat.clickCount;
             this.catPhoto.src = 'https://' + currentCat.url + '.jpg';
@@ -100,7 +80,28 @@ $(function(){
 
     };
 
+    var listView = {
+        init: function() {
+            this.ul = document.getElementById('cat-list');
+            console.log(this.ul + "UL");
+            this.render();
+        },
+        render: function() {
+            this.ul.innerHTML = '';
+            var cats = controller.getCats();
+            cats.forEach( function(cat) {
+                var li = document.createElement('li');
+                console.log(cat.name);
+                li.textContent = cat.name;
+                li.addEventListener('click', (function(cat) {
+                    return function() {
+                        controller.setCurrentCat(cat);
+                        catView.render();
+                    };
+                })(cat));
+                this.ul.appendChild(li);
+            });
+        }
+    };
 
-
-
-});
+    controller.init();
